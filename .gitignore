@@ -13,3 +13,11 @@ node_modules
 
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store
+
+# The compiled css code
+theme.css
+theme.css.map
+theme.css
+
+# Unrelated files
+examples/

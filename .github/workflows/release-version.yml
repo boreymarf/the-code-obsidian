@@ -22,8 +22,8 @@ jobs:
         run: npm install -g sass
         
       - name: Compile SCSS
-        run: sass src/:./ --no-source-map
-        
+        run: npm run build:css
+
       - name: Bundle
         id: bundle
         run: |
