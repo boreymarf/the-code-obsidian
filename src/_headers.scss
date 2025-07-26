@@ -1,0 +1,64 @@
+@use "sass:map";
+
+body {
+
+	@for $i from 1 through 6 {
+		--h#{$i}-size: var(--font-text-size);
+		--h#{$i}-weight: 600;
+		--h#{$i}-color: hsl(199, 100%, 49%);
+		--h#{$i}-line-height: var(--font-text-size);
+	}
+
+
+	--h1-color: white;
+	--h1-weight: 900;
+	--h1-size: 30px;
+	--h2-color: white;
+	--h2-weight: 900;
+}
+
+@for $i from 1 through 6 {
+	h#{$i} {
+		letter-spacing: 0;
+	}
+}
+
+h1 {
+	line-height: 1.5;
+	text-align: center;
+	width: 100%;
+}
+
+
+h2 {
+	box-shadow: inset 0 -24px 0 hsl(199, 100%, 49%);
+	display: inline;
+	line-height: 1.5;
+	padding-right: 1ch;
+	padding-left: 1ch;
+}
+
+// Display hash characters (#) before headers
+// BUG: The collapse icon gets misplaced in the reading mode
+$markers: (
+	2: "## ",
+	3: "### ",
+	4: "#### ",
+	5: "##### ",
+	6: "###### "
+);
+
+@mixin header-marker($level) {
+	content: map.get($markers, $level);
+	font-size: calc(var(--h#{$level}-size) * var(--hh-marker-size));
+	margin-left: var(--hh-gutter-margin);
+	color: var(--color-base-50);
+}
+
+@for $i from 3 through 6 {
+
+	h#{$i}::before,
+	.is-live-preview .HyperMD-header-#{$i}:not(.cm-active)::before {
+		@include header-marker($i);
+	}
+}
